@@ -38,8 +38,8 @@ export default function App() {
   }, [])
 
   if (!dbLoaded) return (
-    <View style={{ flex: 1 }}>
-      <ActivityIndicator size={"large"} />
+    <View style={{ flex: 1, justifyContent:'center', alignItems:'center' }}>
+      <ActivityIndicator size={50} />
       <Text>Loading...</Text>
     </View>
   )
@@ -48,9 +48,9 @@ export default function App() {
     <NavigationContainer>
       <Suspense
         fallback={
-          <View style={{ flex: 1 }}>
-            <ActivityIndicator size={"large"} />
-            <Text>Loading...</Text>
+          <View style={{ flex: 1 , justifyContent:'center', alignItems:'center'}}>
+            <ActivityIndicator size={50} />
+            <Text style={{fontSize:20}}>Loading...</Text>
           </View>
         }
       >

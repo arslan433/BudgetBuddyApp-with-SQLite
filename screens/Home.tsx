@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
     paddingBottom: 7,
-    // Add other container styles as necessary
   },
   periodTitle: {
     fontSize: 20,

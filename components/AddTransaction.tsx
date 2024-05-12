@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {  Text, TextInput, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Card from "./ui/Cards";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
@@ -26,6 +26,13 @@ export default function AddTransaction({
   React.useEffect(() => {
     getExpenseType(currentTab);
   }, [currentTab]);
+  const getTabStyle = (index:any) => ({
+    fontWeight: 'bold',
+    color: currentTab === index ? 'white' : '#007BFF20',
+    backgroundColor: currentTab === index ? '#007BFF20' : 'transparent',
+  });
+
+
 
   async function getExpenseType(currentTab: number) {
     setCategory(currentTab === 0 ? "Expense" : "Income");
@@ -82,15 +89,18 @@ export default function AddTransaction({
               style={{ marginBottom: 15 }}
               onChangeText={setDescription}
             />
+            
             <Text style={{ marginBottom: 6 }}>Select a entry type</Text>
             <SegmentedControl
               values={["Expense", "Income"]}
-              style={{ marginBottom: 15 }}
-              selectedIndex={0}
+              selectedIndex={currentTab}
               onChange={(event) => {
                 setCurrentTab(event.nativeEvent.selectedSegmentIndex);
               }}
+              style={[getTabStyle(currentTab) , {marginBottom:15}]}
             />
+
+        
             {categories.map((cat) => (
               <CategoryButton
                 key={cat.name}
@@ -104,14 +114,18 @@ export default function AddTransaction({
             ))}
           </Card>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-around" }}
+            style={{ flexDirection: "row", justifyContent: "space-around" , marginTop:10}}
           >
-            <Button
-              title="Cancel"
-              color="red"
-              onPress={() => setIsAddingTransaction(false)}
-            />
-            <Button title="Save" onPress={handleSave} />
+            <TouchableOpacity 
+             onPress={() => setIsAddingTransaction(false)}
+            >
+                <Text style={{color:"red" , fontSize:20}}>Cancel</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity onPress={handleSave}>
+                <Text style={{color:"blue" , fontSize:20}}>Save </Text>
+            </TouchableOpacity>
+            
           </View>
         </View>
       ) : (
